@@ -45,17 +45,6 @@ function UsersContainer(props) {
   );
 }
 
-// const mapStateToProps = (state) => {
-//   return {
-//     users: state.usersPage.users,
-//     pageSize: state.usersPage.pageSize,
-//     totalUsersCount: state.usersPage.totalUsersCount,
-//     currentPage: state.usersPage.currentPage,
-//     isFetching: state.usersPage.isFetching,
-//     followingProgress: state.usersPage.followingProgress,
-//   };
-// };
-
 const mapStateToProps = (state) => {
   return {
     users: getUsersState(state),
