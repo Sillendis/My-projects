@@ -16,7 +16,7 @@ import {
   getIsFetching,
   getPageSize,
   getTotalUsersCount,
-  getUsersState,
+  getUsersState
 } from "../../redux/users-selectors";
 
 function UsersContainer(props) {
