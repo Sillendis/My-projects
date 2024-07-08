@@ -1,4 +1,4 @@
-import { addPostCreator } from "../../../redux/profile-reducer";
+import { addPostCreator, removePostCreator} from "../../../redux/profile-reducer";
 import MyPosts from "./MyPosts";
 import { connect } from "react-redux";
 
@@ -13,6 +13,9 @@ const mapDispatchToProps = (dispatch) => {
   return {
     addPost: (newPostText) => {
       dispatch(addPostCreator(newPostText));
+    },
+    removePost: (postId) => {
+      dispatch(removePostCreator(postId));
     },
   };
 };

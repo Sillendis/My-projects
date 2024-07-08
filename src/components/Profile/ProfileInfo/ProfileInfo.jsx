@@ -4,8 +4,11 @@ import ProfileStatus from "./ProfileStatus";
 
 const ProfileInfo = (props) => {
   if (!props.profile) {
+    console.log("Profile is null, showing Preloader");
     return <Preloader />;
   }
+
+  console.log("Profile loaded:", props.profile);
 
   return (
     <div>

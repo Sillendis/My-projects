@@ -15,7 +15,7 @@ let rootReducer = combineReducers({
   app: appReducer,
 });
 
-let store = configureStore({ reducer: rootReducer });
+const store = configureStore({ reducer: rootReducer });
 
 window.store = store;
 

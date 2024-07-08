@@ -4,6 +4,7 @@ import { profileAPI } from "../API/API";
 const ADD_POST = "ADD_POST";
 const SET_USER_PROFILE = "SET_USER_PROFILE";
 const SET_STATUS = "SET_STATUS";
+const REMOVE_POST = "REMOVE_POST";
 
 let initialState = {
   posts: [
@@ -19,14 +20,13 @@ const profileReducer = (state = initialState, action) => {
   switch (action.type) {
     case ADD_POST:
       let newPost = {
-        id: 4,
+        id: state.posts.length + 1,
         words: action.newPostText,
         likesCount: 0,
       };
       return {
         ...state,
         posts: [...state.posts, newPost],
-        newPostText: "",
       };
 
     case SET_STATUS:
@@ -47,6 +47,11 @@ export const addPostCreator = (newPostText) => ({
   newPostText,
 });
 
+export const removePostCreator = (newPostText) => ({
+  type: REMOVE_POST,
+  newPostText,
+});
+
 export const setUserProfile = (profile) => ({
   type: SET_USER_PROFILE,
   profile: profile,
@@ -57,24 +62,33 @@ export const setStatus = (status) => ({
   status,
 });
 
-export const getUserProfile = (userId) => (dispatch) => {
-  usersAPI.getProfile(userId).then((response) => {
+export const getUserProfile = (userId) => async (dispatch) => {
+  try {
+    const response = await usersAPI.getProfile(userId);
     dispatch(setUserProfile(response.data));
-  });
+  } catch (error) {
+    console.error("Error fetching profile:", error);
+  }
 };
 
-export const getStatus = (userId) => (dispatch) => {
-  profileAPI.getStatus(userId).then((response) => {
+export const getStatus = (userId) => async (dispatch) => {
+  try {
+    const response = await profileAPI.getStatus(userId);
     dispatch(setStatus(response.data));
-  });
+  } catch (error) {
+    console.error("Error fetching status:", error);
+  }
 };
 
-export const updateStatus = (status) => (dispatch) => {
-  profileAPI.updateStatus(status).then((response) => {
+export const updateStatus = (status) => async (dispatch) => {
+  try {
+    const response = await profileAPI.updateStatus(status);
     if (response.data.resultCode === 0) {
       dispatch(setStatus(status));
     }
-  });
+  } catch (error) {
+    console.error("Error updating status:", error);
+  }
 };
 
 export default profileReducer;

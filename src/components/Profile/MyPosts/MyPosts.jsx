@@ -9,7 +9,7 @@ import { Textarea } from "../../common/Preloader/FormsControls/FormsControls";
 const validationSchema = Yup.object({
   newPostText: Yup.string()
     .required("Post text is required")
-    .max(10, "Post text cannot exceed 10 characters"),
+    .max(50, "Post text cannot exceed 50 characters"),
 });
 
 const MyPosts = (props) => {

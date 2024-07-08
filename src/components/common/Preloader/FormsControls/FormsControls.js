@@ -1,9 +1,9 @@
-import React from 'react';
-import styles from './FormsControls.module.css';
+import React from "react";
+import styles from "./FormsControls.module.css";
 
 // Обертка для поля формы с отображением ошибок
 const FormControl = ({ input, meta, children, ...props }) => {
-  const hasError = meta?.touched && meta?.error;  // Проверяем, что meta и meta.touched не undefined
+  const hasError = meta?.touched && meta?.error; // Проверяем, что meta и meta.touched не undefined
   return (
     <div className={`${styles.formControl} ${hasError ? styles.error : ""}`}>
       {children}
@@ -13,12 +13,8 @@ const FormControl = ({ input, meta, children, ...props }) => {
 };
 
 // Компонент для textarea
-export const Textarea = (props) => {
-  return (
-    <FormControl {...props}>
-      <textarea {...props.input} {...props} />
-    </FormControl>
-  );
+export const Textarea = ({ field, form, ...props }) => {
+  return <textarea {...props.input} {...props} {...field} />;
 };
 
 // Компонент для input

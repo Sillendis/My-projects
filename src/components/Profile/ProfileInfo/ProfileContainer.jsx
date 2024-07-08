@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useMemo } from "react";
 import Profile from "../Profile";
 import { connect } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
@@ -13,16 +13,15 @@ function ProfileContainer(props) {
   let { userId } = useParams();
   const navigate = useNavigate();
   let currUserId = userId ? parseInt(userId) : props.authorizedUserId || 31275;
-  if (!userId) {
-    userId = props.authorizedUserId;
-    if (!userId) {
-      navigate("/login");
-    }
-  }
+
   useEffect(() => {
+    if (!currUserId) {
+      navigate("/login");
+      return;
+    }
     props.getUserProfile(currUserId);
     props.getStatus(currUserId);
-  }, [currUserId, props.getUserProfile, props.getStatus]);
+  }, [currUserId]);
 
   return (
     <div>
