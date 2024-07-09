@@ -18,6 +18,7 @@ function ProfileStatus(props) {
   const handleChange = (e) => {
     setStatus(e.target.value);
   };
+
   const handleBlur = () => {
     setEditMode(false);
     props.updateStatus(status);
